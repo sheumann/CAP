@@ -36,6 +36,8 @@ static char revision[] = "$Revision: 2.5 $";
 # include <time.h>
 #endif USETIMES
 
+static char *mytod();
+
 /* current debug level */
 static int dlevel;
 
@@ -83,7 +85,6 @@ logit(va_alist)
 va_dcl
 #endif USEVPRINTF
 {
-  static char *mytod();
 #ifdef USEVPRINTF
   register char *fmt;
   va_list args;
@@ -91,10 +92,6 @@ va_dcl
 #endif USEVPRINTF
   int saveerr;
   extern int errno;
-  extern int sys_nerr;
-#ifndef __FreeBSD__
-  extern char *sys_errlist[];
-#endif
 
   if (lfp == NULL)		/* no logging? */
     return;

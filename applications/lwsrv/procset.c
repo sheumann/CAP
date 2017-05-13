@@ -59,6 +59,8 @@ static char revision[] = "$Revision: 2.13 $";
 #include "procset.h"
 #include "spmisc.h"
 
+private void clearprocsent();
+
 extern char *myname;
 extern int verbose;
 
@@ -111,7 +113,6 @@ void
 ClearProcSetsSent()
 {
 #ifdef LWSRV8
-  private void clearprocsent();
   clearprocsent(*dictlist);
 #else  /* LWSRV8 */
   DictList *dl;

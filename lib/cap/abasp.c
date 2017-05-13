@@ -18,6 +18,7 @@
  *  Aug   4, 1986    CCKim	Verified: level 0
 */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -486,12 +487,14 @@ int *comp;
   /* after all the sessids have been checked */
   i = 0;
   while (aspskt_find_sessid(SLSRefNum, (byte)next_sessid) != NULL) {
-    next_sessid = ++next_sessid & 0xff; /* single byte */
+    ++next_sessid;
+    next_sessid &= 0xff; /* single byte */
     if (i++ > 255)
       return(NoMoreSessions);
   }
   as->SessID = (byte)next_sessid;
-  next_sessid = ++next_sessid & 0xff; /* single byte */
+  ++next_sessid;
+  next_sessid &= 0xff; /* single byte */
 #ifdef DEBUGAUFS
   logit(0, "asp: getsession: looking for connection on %d with sessid %d",
       as->SessRefNum, as->SessID);

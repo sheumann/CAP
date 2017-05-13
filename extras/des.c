@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #ifdef __alpha
 #define long int
 #endif /* __alpha */
@@ -11,7 +13,7 @@
 #define	NULL	0
 
 #ifdef BYTESWAPPED
-unsigned long byteswap();
+static unsigned long byteswap();
 #endif BYTESWAPPED
 
 /* Tables defined in the Data Encryption Standard documents */
@@ -181,8 +183,6 @@ static long f();
 desinit(mode)
 int mode;
 {
-	char *malloc();
-
 	if(sp != NULL){
 		/* Already initialized */
 		return 0;

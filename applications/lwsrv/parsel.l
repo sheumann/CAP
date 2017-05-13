@@ -1,3 +1,7 @@
+%{
+static int searchkeywords();
+static int keycmp();
+%}
 %%
 \"[^"]*\"	{
 		  register int c;
@@ -51,7 +55,6 @@
 		  /* just ignore comments */
 		}
 [^ \t\n,;=(){}"'#]+	{
-		  static int searchkeywords();
 		  return(searchkeywords(yytext, &yylval.string));
 		}
 %%
@@ -200,7 +203,6 @@ char *str, **outstr;
   register struct keywordbuf *kp;
   register char *cp;
   char buf[BUFSIZ];
-  static int keycmp();
 
   if (*str != '-') {
     strcpy(buf, str);
